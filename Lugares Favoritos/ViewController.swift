@@ -19,7 +19,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        map.showsUserLocation = true
         if activePlace == -1 {
             manager.desiredAccuracy = kCLLocationAccuracyBest
             manager.delegate = self
@@ -81,6 +81,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
                 self.map.addAnnotation(annotation)
                 
                 places.append(["name": title, "lat": "\(newCoordinate.latitude)", "lon": "\(newCoordinate.longitude)"])
+                NSUserDefaults.standardUserDefaults().setObject(places, forKey: "places")
             })
         }
     }

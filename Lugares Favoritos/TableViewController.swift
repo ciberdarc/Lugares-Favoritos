@@ -17,7 +17,11 @@ class TableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        places.append(["name": "Taj Mahal", "lat": "27.1750199", "lon": "78.0399665"])
+        places.append(["name": "Trabajo Nielsen", "lat": "19.435874", "lon": "-99.211891"])
+        
+        if NSUserDefaults.standardUserDefaults().objectForKey("places") != nil {
+            places = NSUserDefaults.standardUserDefaults().objectForKey("places") as! [Dictionary<String, String>]
+        }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -79,6 +83,7 @@ class TableViewController: UITableViewController {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             places.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            NSUserDefaults.standardUserDefaults().setObject(places, forKey: "places")
             self.tableView.reloadData()
         }
     }
